@@ -44,6 +44,8 @@ async function connect() {
       })
       await listenForTransactionMine(transactionResponse,provider);
       console.log("Done")
+      document.getElementById("done").innerText = "Done Now check the balance";
+
     }catch(error){
       console.log(error);
     }
@@ -69,7 +71,9 @@ async function connect() {
       const provider =  new ethers.providers.Web3Provider(window.ethereum) // getting api form meta mask
       const balance = await provider.getBalance(contractAddress)
       console.log(ethers.utils.formatEther(balance))
-      balanceButton.innerHTML = `${ethers.utils.formatEther(balance)} eth`;
+      //balanceButton.innerHTML = `${ethers.utils.formatEther(balance)} eth`;
+      document.getElementById("balanceDisplay").innerText = ethers.utils.formatEther(balance);
+
     }
 
   }
@@ -85,6 +89,8 @@ async function connect() {
         const transactionResponse = await contract.withdraw()
         await listenForTransactionMine(transactionResponse,provider);
       console.log("Withdrawal done")
+      document.getElementById("withdone").innerText = "Amount has been withdrawn from the contract refresh the balance";
+
       }catch(error){
         console.log(error)
       }
